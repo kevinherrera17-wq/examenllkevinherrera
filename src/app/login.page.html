@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Iniciar sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label
+          >Correo:
+          <ion-input
+            formControlName="email"
+            [ngClass]="{ 'form-inputError': isEmailRequired || isEmailInvalid }"
+          ></ion-input>
+        </ion-label>
+      </ion-item>
+      @if(isEmailRequired){
+      <ion-note class="form-errorMessage">El correo es requerido.</ion-note>
+      } @if(isEmailInvalid){
+      <ion-note class="form-errorMessage">El correo no es válido.</ion-note>
+      }
+      <ion-item>
+        <ion-label
+          >Contraseña:
+          <ion-input
+            formControlName="password"
+            type="password"
+            [ngClass]="{ 'form-inputError': isPasswordRequired}"
+          >
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-label>
+      </ion-item>
+      @if(isPasswordRequired){
+      <ion-note class="form-errorMessage">La contraseña es requerida.</ion-note>
+      }
+      <ion-button
+        [disabled]="isFormInvalid"
+        [ariaDisabled]="isFormInvalid"
+        type="submit"
+        aria-label="Ingresa a tu cuenta"
+        >Iniciar sesión</ion-button
+      >
+    </form>
+  </div>
+</ion-content>
